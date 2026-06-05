@@ -11,8 +11,8 @@ load_dotenv()
 
 # ── Page config ───────────────────────────────────────────────────────────────
 st.set_page_config(
-    page_title="Enterprise AI Intelligence Agent",
-    page_icon="🧠",
+    page_title="AI-Powered Research & Recommendation Agent",
+    page_icon="",
     layout="wide",
 )
 
@@ -38,12 +38,12 @@ KNOWN_SECTIONS = [
 ]
 
 TAB_ICONS = {
-    "Company Overview": "🏢",
-    "Key Business Information": "📊",
-    "Business Challenges": "⚠️",
-    "Company-Specific AI Opportunities": "🤖",
-    "Personalized CEO Pitch": "🎯",
-    "Competitor Snapshot": "🔍",
+    "Company Overview": "",
+    "Key Business Information": "",
+    "Business Challenges": "",
+    "Company-Specific AI Opportunities": "",
+    "Personalized CEO Pitch": "",
+    "Competitor Snapshot": "",
 }
 
 
@@ -107,11 +107,11 @@ def report_to_json(company_name: str, sections: dict) -> str:
 
 # ── Sidebar ───────────────────────────────────────────────────────────────────
 with st.sidebar:
-    st.header("🧠 Agent Controls")
-    st.button("🗑️ Clear History", on_click=clear_history, type="secondary")
+    st.header("Agent Controls")
+    st.button("Clear History", on_click=clear_history, type="secondary")
 
     st.divider()
-    st.subheader("📋 Assessment History")
+    st.subheader("Assessment History")
     if not st.session_state.history:
         st.caption("No assessments generated yet.")
     else:
@@ -119,12 +119,11 @@ with st.sidebar:
             idx = len(st.session_state.history) - i
             st.markdown(f"**{idx}.** {item['company']}")
 
-    st.divider()
-    st.caption("Powered by Gemini 2.5 Pro · Google Search · ReportLab")
-
+   
+    
 
 # ── Main title ────────────────────────────────────────────────────────────────
-st.title("🧠 Enterprise AI Intelligence Agent")
+st.title("AI-Powered Research & Recommendation Agent")
 st.markdown(
     "Generate deep, factual company intelligence assessments with **Gemini 2.5 Pro** and live web search."
 )
@@ -140,7 +139,7 @@ with st.form(key="company_input_form"):
     with col2:
         st.markdown("<br>", unsafe_allow_html=True)
         submit_button = st.form_submit_button(
-            label="⚡ Generate Assessment", type="primary", use_container_width=True
+            label=" Generate Research Report", type="primary", use_container_width=True
         )
 
 # ── Generate report ───────────────────────────────────────────────────────────
@@ -177,7 +176,7 @@ if st.session_state.history:
     latest_report = latest["report"]
 
     st.divider()
-    st.header(f"📄 Intelligence Report: {latest_company}")
+    st.header(f" Intelligence Report: {latest_company}")
 
     # Parse into clean sections
     sections = parse_sections(latest_report)
@@ -242,7 +241,7 @@ if st.session_state.history:
         already_generated = latest_company in st.session_state.competitor_cache
 
         if not already_generated:
-            if st.button("🔍 Generate Competitor Snapshot", type="primary"):
+            if st.button("Generate Competitor Snapshot", type="primary"):
                 with st.spinner("Researching competitors with live web search …"):
                     try:
                         snapshot = generate_competitor_snapshot(latest_company)
@@ -259,7 +258,7 @@ if st.session_state.history:
 
     # ── Export section ────────────────────────────────────────────────────────
     st.divider()
-    st.subheader("📥 Export Assessment")
+    st.subheader(" Export Assessment")
 
     filename_base = (
         latest_company.replace(" ", "_").replace("/", "_").lower()
